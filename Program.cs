@@ -12,6 +12,7 @@ namespace ExceptionHandlingTask
 
             while (true)
             {
+                //keep asking for user input. if they enter a 3 then program exits
                 input = GetMenuInput();
                 if (input != 3)
                 {
@@ -38,6 +39,7 @@ namespace ExceptionHandlingTask
 
         public static int GetMenuInput()
         {
+            //menu items
             Console.WriteLine("---------------------------------");
             Console.WriteLine("Classroom Entry Program");
             Console.WriteLine("1. Enter new student info");
@@ -46,6 +48,8 @@ namespace ExceptionHandlingTask
             Console.Write("Enter a menu number: ");
 
             int number;
+
+            //only accept number inputs. i used tryparse instead of try/catch here
             while (!int.TryParse(Console.ReadLine(), out number))
             {
                 Console.WriteLine("Invalid! Must enter a number");
@@ -56,6 +60,7 @@ namespace ExceptionHandlingTask
         }
         public static void CreateStudentEntry()
         {
+            //ask for all the info about the student here
             string FName;
             string LName;
             string RoomNo;
@@ -93,6 +98,7 @@ namespace ExceptionHandlingTask
 
                 try
                 {
+                    //try to parse the string entered by user as a DateTime. will keep asking until correct format is input
                     dateTime = DateTime.Parse(input);
                     validDateTIme = true;
                 }
@@ -110,6 +116,9 @@ namespace ExceptionHandlingTask
 
             while (!validDateTime)
             {
+                //Date left must be AFTER date entered to perform the time stayed calculation.
+                //making sure that is the case here by using DateTime.Compare
+                //time stayed is calculated in the student class. data is validated here
                 t2 = CheckValidDateTime();
 
                 int result = DateTime.Compare(t1, t2);
@@ -126,6 +135,7 @@ namespace ExceptionHandlingTask
         }
         private static void PrintAllStudentInfo()
         {
+            //if the list isnt empty, print info for each student
             if (students.Count > 0)
             {
                 foreach (Student s in students)
